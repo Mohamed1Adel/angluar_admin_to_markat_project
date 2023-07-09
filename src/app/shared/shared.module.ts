@@ -6,10 +6,25 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SelectComponent } from './components/select/select.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HeaderComponent, SpinnerComponent, SelectComponent],
-  imports: [CommonModule, BrowserModule, RouterModule, HttpClientModule],
-  exports: [HeaderComponent, SpinnerComponent,SelectComponent],
+  imports: [
+    CommonModule,
+    BrowserModule,
+    RouterModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  exports: [
+    HeaderComponent,
+    SpinnerComponent,
+    SelectComponent,
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+  ],
 })
 export class SharedModule {}

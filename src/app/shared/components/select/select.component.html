@@ -1,7 +1,7 @@
     <label for="my-1">{{title}}</label>
     <select class="form-control" (change)="detectChanges($event)">
-      <option vaule="all" selected>All</option>
-      <option value="{{ opt }}" *ngFor="let opt of data">
+      <option vaule="all" *ngIf="All" selected>All</option>
+      <option value="{{ opt }}" [selected]="opt == select" *ngFor="let opt of data">
         {{ opt }}
       </option>
     </select>

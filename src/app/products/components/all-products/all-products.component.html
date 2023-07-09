@@ -1,31 +1,127 @@
-<div class="box mt-5">
+<!-- <div class="box mt-5">
   <div class="my-2 w-25">
 <app-select [data] = "categories" [title]="'Categories'" (selectedValue)="filterCategory($event)"></app-select>
   </div>
-
   <div class="row" *ngIf="!loading">
-
-      <div class="col-md-3 col-sm-12" *ngFor="let item of products; " trackBy="">
-        <div class="item">
-          <img src="{{ item.image }}" alt="" />
-          <div class="body">
-            <h4>{{ item.title }}</h4>
-            <p>{{ item.description }}</p>
-          </div>
-          <div
-            class="px-3 mb-2 d-flex justify-content-between align-itams-center"
-          >
-            <button class="btn btn-success">add to cart</button>
-            <span>{{ item.price }}</span>
-          </div>
-        </div>
+      <div class="col-md-3 col-sm-12" *ngFor="let item of products" >
+        <app-product [data]="item" (item) = "addToCart($event)"></app-product>
       </div>
-
   </div>
-
     <div class="text-center w-100" *ngIf="loading">
       <app-spinner></app-spinner>
+    </div>
+  </div> -->
+
+          <button
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#viewCart"
+          >
+            View
+          </button>
+
+
+    <div class="box mt-5">
+
+    <div class="row">
+      <div class="col-md-2" >
+      </div>
+      <div class="col-md-6">
+        Title
+      </div>
+      <div class="col-md-2">
+        Category
+      </div>
+      <div class="col-md-2">
+        Price
+      </div>
     </div>
   </div>
 
 
+
+  <div class="box mt-5">
+    <div class="row" *ngFor="let item of products">
+      <div class="col-md-2" >
+        <img src="{{item.image}}" alt="" style="max-width:100px;max-height:100px">
+      </div>
+      <div class="col-md-6">
+        {{item.title}}
+      </div>
+      <div class="col-md-2">
+        {{item.category}}
+      </div>
+      <div class="col-md-1">
+        {{item.price}}
+      </div>
+      <div class="update">
+        <button class="btn btn-warning" data-toggle="modal" data-target="#viewCart" (click)="update(item)">Update</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- Modal -->
+<div
+  class="modal fade"
+  id="viewCart"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" style="max-width: 900px !important">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Add Product</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <label for="">Title</label>
+              <input type="text" formControlName="title" class="form-control" placeholder="title">
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <label for="">price</label>
+              <input type="number" formControlName="price" class="form-control" placeholder="price">
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <app-select [data] = "categories" [title]="'Categories'" (selectedValue)="getSelectedCategory($event)"  [All]="false" [select]="form.value.category"></app-select>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <label for="">Image</label>
+              <img src="{{base64}}" alt="">
+              <input type="file" formControlName="" class="form-control" (change)="getImagePath($event)" >
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <label for="">Description</label>
+              <textarea class="form-control" formControlName="description" placeholder="type here..."></textarea>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end mt-3">
+            <button class="btn btn-success" [disabled]="form.invalid" (click)="addProdcut()">Add Product</button>
+            <button class="btn btn-success"  (click)="updateProduct(form.value)">update product</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>

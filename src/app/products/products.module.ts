@@ -4,9 +4,19 @@ import { AllProductsComponent } from './components/all-products/all-products.com
 import { AllDetailsComponent } from './components/all-details/all-details.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from "../shared/shared.module";
+import { ProductComponent } from './components/product/product.component';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-    declarations: [AllProductsComponent, AllDetailsComponent],
-    imports: [BrowserModule, CommonModule, SharedModule]
+  declarations: [AllProductsComponent, AllDetailsComponent, ProductComponent],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    RouterModule,
+  ],
+  exports:[RouterModule]
 })
 export class ProductsModule {}

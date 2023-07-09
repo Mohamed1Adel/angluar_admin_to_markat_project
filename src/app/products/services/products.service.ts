@@ -6,6 +6,7 @@ import { environment } from 'environments/environment';
   providedIn: 'root',
 })
 export class ProductsService {
+  item:any
   constructor(private http: HttpClient) {}
 
   getAllProducts() {
@@ -20,5 +21,18 @@ export class ProductsService {
     return this.http.get(
       `${environment.baseApi}products/category/${keyword}`
     );
+  }
+
+  getProductById(id:any){
+    return this.http.get(environment.baseApi + "products/" + id)
+  }
+
+
+  cteateProduct(model:any){
+    return this.http.post(environment.baseApi +'products',model)
+  }
+
+  updateProduct(id:any , model:any){
+    return this.http.put(environment.baseApi + 'products/'+id, model);
   }
 }

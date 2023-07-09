@@ -8,6 +8,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class SelectComponent {
   @Input() title: string = '';
   @Input() data:any[]=[];
+  @Input() select = '';
+  @Input() All:boolean =true
+
+
   @Output() selectedValue = new EventEmitter()
   detectChanges(event:any){
     this.selectedValue.emit(event)
